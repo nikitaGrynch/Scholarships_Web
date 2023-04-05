@@ -1,0 +1,12 @@
+@model Scholarships_Web.Models.Scholarship
+
+<div class="card" style="width: 17vw; height: 200px;">
+    <a asp-controller="Home" asp-action="ScholarshipInfo" asp-route-id="@Model.Id" style="border: none">
+        <button style="width: 17vw; height: 200px;" type="button" class="btn btn-outline-primary">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Name</h4>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Type.Name</h6>
+            </div>
+        </button>
+    </a>
+</div>

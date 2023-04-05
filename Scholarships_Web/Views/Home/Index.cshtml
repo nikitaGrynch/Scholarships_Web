@@ -1,0 +1,69 @@
+﻿@model Scholarships_Web.Models.Home.Model
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="width: 80vw; padding: 20px; border: solid gray 2px; border-radius: 8px;">
+    <div style="display: flex; justify-content: space-between; margin: 0 30px;">
+        <a asp-controller="Home" asp-action="AddScholarship"><button type="button" class="btn btn-primary">Add</button></a>
+        <h3>Scholarships List</h3>
+    </div>
+    
+    <div style="height: 2px; width: 95%; background-color: #1e2125; border-radius: 6px;
+margin: 10px auto;"></div>
+    <div style="display: flex; gap: 50px">
+        <div class="form-floating" style="width: 250px;">
+            <select onchange = "setType(this.value)" class="form-select" id="typeFilter" aria-label="Floating label select example">
+                <option value="0" selected>All</option>
+                @foreach (var type in @Model.ScholarshipTypes)
+                {
+                    @if (Model.SelectedTypeIdFilter == type.Id)
+                    {
+                        <option value="@type.Id" selected="">@type.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@type.Id">@type.Name</option>
+                    }
+                }
+            </select>
+            <label for="typeFilter">Type filter</label>
+        </div>
+        <div class="form-floating" style="width: 250px;">
+            <select onchange = "setDegree(this.value)" class="form-select" id="degreeFilter" aria-label="Floating label select example">
+                <option value="0" selected>All</option>
+                @foreach (var degree in @Model.Degrees)
+                {
+                    @if (Model.SelectedDegreeIdFilter == degree.Id)
+                    {
+                        <option value="@degree.Id" selected="">@degree.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@degree.Id">@degree.Name</option>
+                    }
+                }
+            </select>
+            <label for="degreeFilter">Type filter</label>
+        </div>
+    </div>
+    <div style="margin: 20px;">
+        @if (Model.GetScholarships().Count > 0)
+        {
+            @Html.DisplayFor(m => m.Scholarships, "Scholarships")
+        }
+        else
+        {
+            <h3>No Scholarships found</h3>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+       function setType(dropDownValue) {
+          window.location.href = '@Url.Action("SetScholarshipTypeFilter", "Home")/' + '?id=' + dropDownValue;
+       }
+       function setDegree(dropDownValue) {
+                 window.location.href = '@Url.Action("SetScholarshipDegreeFilter", "Home")/' + '?id=' + dropDownValue;
+              }
+</script>

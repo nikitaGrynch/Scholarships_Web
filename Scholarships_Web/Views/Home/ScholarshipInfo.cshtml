@@ -1,0 +1,26 @@
+@model Scholarships_Web.Models.Scholarship
+
+@{
+    ViewData["Title"] = "Scholarship Info";
+}
+
+<div style="display: flex;">
+    <a asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-secondary">Go Back</button></a>
+    <h1 style="margin-left: 30px">@Model.Name</h1>
+</div>
+<dl class="row" style="margin-top: 40px;">
+  <dt class="col-sm-3">Description:</dt>
+    <dd class="col-sm-7">@Model.Description</dd>
+    <dt class="col-sm-3">Degree:</dt>
+    <dd class="col-sm-7">@Model.Degree.Name</dd>
+    <dt class="col-sm-3">Type:</dt>
+    <dd class="col-sm-7">@Model.Type.Name</dd>
+    <dt class="col-sm-3">Requirements:</dt>
+    <dd class="col-sm-7">@Model.Requirements</dd>
+    <dt class="col-sm-3">Financial Coverage:</dt>
+      <dd class="col-sm-7">@Model.FinancialCoverage</dd>
+
+  
+</dl>
+<a asp-controller="Home" asp-action="DeleteScholarship" asp-route-id="@Model.Id"><button type="button" class="btn btn-danger">Delete</button></a>
+
